@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Real-time Sensor Data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #data {
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Real-time Sensor Data</h1>
+  <div id="data">Waiting for data...</div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    // Listen for real-time sensor data updates
+    socket.on('update', (data) => {
+      const display = document.getElementById('data');
+      display.innerHTML = `
+        Analog Value: ${data.analog_value} <br>
+        Digital Value: ${data.digital_value} <br>
+        Timestamp: ${data.timestamp}
+      `;
+    });
+  </script>
+</body>
+</html>
